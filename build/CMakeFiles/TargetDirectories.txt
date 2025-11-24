@@ -1,3 +1,0 @@
-/home/gabriel/projects/battleCard/build/CMakeFiles/my_sfml_app.dir
-/home/gabriel/projects/battleCard/build/CMakeFiles/edit_cache.dir
-/home/gabriel/projects/battleCard/build/CMakeFiles/rebuild_cache.dir

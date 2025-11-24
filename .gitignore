@@ -1,1 +1,19 @@
-./build/*
+# Arquivos de Build
+####################
+build/
+bin/
+lib/
+
+# Arquivos temporários e objetos
+*.o
+*.obj
+
+# Executáveis
+*.exe
+!/bin/*.exe  # Exemplo: se você quiser manter executáveis em uma pasta específica
+
+# Arquivos do CMake gerados (geralmente dentro da pasta 'build')
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
