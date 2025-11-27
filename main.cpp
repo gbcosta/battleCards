@@ -1,29 +1,26 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window.hpp>
-#include <iostream>
+#include "./src/menu.h"
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode({960, 720}), "My window");
+  Menu menu;
+  sf::RenderWindow window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}),
+                          "My window");
+  sf::RectangleShape bg({2000.0f, 2000.0f});
 
-  sf::Texture texture;
-  if (!texture.loadFromFile("../assets/options.png", false,
-                            sf::IntRect({0, 0}, {840, 475}))) {
-    std::cout << "error" << std::endl;
-  }
-  sf::Sprite sprite(texture);
-
-  sprite.setOrigin({840 / 2.0f, 475 / 2.0f});
-  sprite.setScale({0.2f, 0.2f});
-  float x = window.getSize().x;
-  sprite.setPosition({x / 2.0f, 360});
   while (window.isOpen()) {
+    window.setSize({WINDOW_WIDTH, WINDOW_HEIGHT});
     while (const std::optional event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>())
         window.close();
     }
+    std::cout << window.getSize().x << " " << window.getSize().y << std::endl;
     window.clear();
-    window.draw(sprite);
+    window.draw(bg);
+    menu.Draw(window);
     window.display();
   }
 }
