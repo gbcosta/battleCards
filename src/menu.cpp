@@ -5,31 +5,37 @@ Menu::Menu() {
 
   optionsTexture = new sf::Texture(
       "../assets/options.png", srgb,
-      sf::IntRect(sf::Rect(textureTopLeftButton, textureButtonSize)));
+      sf::IntRect(sf::Rect(textureInitialPosition, textureSize)));
   newGameTexture = new sf::Texture(
       "../assets/newGame.png", srgb,
-      sf::IntRect(sf::Rect(textureTopLeftButton, textureButtonSize)));
+      sf::IntRect(sf::Rect(textureInitialPosition, textureSize)));
   quitTexture = new sf::Texture(
       "../assets/quit.png", srgb,
-      sf::IntRect(sf::Rect(textureTopLeftButton, textureButtonSize)));
+      sf::IntRect(sf::Rect(textureInitialPosition, textureSize)));
+  cursorTexture = new sf::Texture(
+      "../assets/cursor.png", srgb,
+      sf::IntRect(sf::Rect(textureInitialPosition, {550, 800})));
 
-  optionsSprite = new sf::Sprite(*optionsTexture);
-  newGameSprite = new sf::Sprite(*newGameTexture);
-  quitSprite = new sf::Sprite(*quitTexture);
+  initButton(optionsTexture, optionsSprite, buttonScale, optionsSpritePosition);
+  initButton(newGameTexture, newGameSprite, buttonScale, newGameSpritePosition);
+  initButton(quitTexture, quitSprite, buttonScale, quitSpritePosition);
+  initButton(cursorTexture, cursorSprite, cursorScale, cursorSpritePosition);
+}
 
-  optionsSprite->setScale(menuScale);
-  quitSprite->setScale(menuScale);
-  newGameSprite->setScale(menuScale);
+void Menu::initButton(sf::Texture *&texture, sf::Sprite *&sprite,
+                      sf::Vector2f scale, sf::Vector2f spritePosition) {
+  sprite = new sf::Sprite(*texture);
 
-  optionsSprite->setPosition(optionsButtonPosition);
+  sprite->setScale({scale.x * menuScale.x, scale.y * menuScale.y});
 
-  newGameSprite->setPosition(newGameButtonPosition);
-
-  quitSprite->setPosition(quitButtonPosition);
+  sprite->setPosition(
+      {spritePosition.x - sprite->getGlobalBounds().size.x / 2,
+       spritePosition.y - sprite->getGlobalBounds().size.y / 2});
 }
 
 void Menu::Draw(sf::RenderWindow &window) {
   window.draw(*newGameSprite);
   window.draw(*optionsSprite);
   window.draw(*quitSprite);
+  window.draw(*cursorSprite);
 }
